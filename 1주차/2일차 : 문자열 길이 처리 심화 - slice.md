@@ -5,7 +5,7 @@
 ## 📌 문제 정보
 
 * 🔹 문제명: 문자열 압축
-* 🔹 사이트: \[프로그래머스]
+* 🔹 사이트: [프로그래머스]
 * 🔹 문제 링크: [https://school.programmers.co.kr/learn/courses/30/lessons/60057](https://school.programmers.co.kr/learn/courses/30/lessons/60057)
 
 ---
