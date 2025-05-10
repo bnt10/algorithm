@@ -1,13 +1,14 @@
-def solution(words):
-    answer = []
-    for s in words.split(" "):
-        temp = [word for word in s.lower()]
-        for i in range(len(temp)):
-            if i % 2 == 0 :
-                temp[i] = temp[i].upper()
-        answer.append("".join(temp))
+def solution(phone_book):
+    S = set(phone_book)
+    print(S)
+    for num in phone_book:
 
-    return " ".join(answer)
+        for i in range(1, len(num)):
 
-print(solution(("scss dccsaz")))
+            if num[:i] in S:
+                print(num[:i])
+                return False
+    return True
 
+
+print(solution(["119", "97674223", "1195524421"]))
