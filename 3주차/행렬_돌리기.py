@@ -27,3 +27,53 @@ def rotate(x1, x2, y1, y2, matrix):
     matrix[x1][y1 + 1] = first
 
     return min_value
+
+
+#version2
+def solution(rows, columns, queries):
+    answer = []
+    board = [[ columns * j+ (i + 1) for j in range(columns) ] for i in range(rows)]
+    for query in queries:
+        a,b,c,d = query[0] -1 , query[1] - 1, query[2] -1 , query[3] -1
+        row1, row2 = board[a][b:d] , board[c][b+1:d+1]
+        _min = min(row1 + row2)
+
+        for i in range(c, a , -1):
+            board[i][d] =board[i-1][d]
+            if board[i][d] < _min : _min = board[i][d]
+        for i in range(a,c):
+            board[i][b] = board[i + 1][b]
+            if board[i][b] < _min : _min = board[i][b]
+
+        board[a][b + 1 : d + 1] , board[c][b:d] = row1, row2
+
+        answer.append(_min)
+    return answer
+
+
+
+def rotate2(x1,x2,y1,y2,matrix):
+    # 인플레이스 방식으로 으로 하면 추가 메모리를 최소화 할 수 있다 그냥 버퍼를 활용하는 방식은
+    # 돌려야 하는 테투리를 버퍼에 담아놓고 읻동 후 삽입해주는 과정이 필요하게 된다
+    first = matrix[x1][y1]
+    min_value = first
+
+    for k in range(x1,x2):
+        matrix[k][y1] = matrix[k+1][y1]
+        min_value = min(min_value, matrix[k+1][y1])
+
+    for k in range(y1,y2):
+        matrix[x2][k] = matrix[x2][k+1]
+        min_value = min(min_value, matrix[x2][k+1])
+
+    for k in range(x2,x1,-1):
+        matrix[k][y2] = matrix[k-1][y2]
+        min_value = min(min_value,matrix[k-1][y2])
+
+    for k in range(y2,y1+1,-1):
+        matrix[y1][k] = matrix[y1][k-1]
+        min_value = min(min_value,matrix[y1][k-1])
+
+    matrix[x1][y1+1] = first
+    return  min_value
+
