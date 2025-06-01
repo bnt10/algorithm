@@ -21,11 +21,38 @@ def rotate(x1, x2, y1, y2, matrix):
     # 4) 위(Top) → 왼쪽(Left) 구간으로 한 칸씩 오→왼 방향으로 이동
     for j in range(y2, y1, -1):
         matrix[x1][j] = matrix[x1][j - 1]
-        min_value = min(min_value, matrix[x1][j])
+        min_value = min(min_value, matrix[x1][j-1])
 
     # (x1, y1) 위치에 저장해 두었던 원래 값을, 회전 후 빈 칸이 된 (x1, y1+1)에 넣어준다.
     matrix[x1][y1 + 1] = first
 
+    return min_value
+
+
+def rotate(x1,y1,x2,y2,metrix):
+    first = metrix[x1][y1]
+    min_value = first
+
+    #아래
+    for i in range(x1,x2):
+        metrix[i][y1] = metrix[i+1][y1]
+        min_value = min(min_value,metrix[i+1][y1])
+
+    #왼쪽
+    for i in range(y1,y2):
+        metrix[x2][i] = metrix[x2][i+1]
+        min_value = min(min_value,metrix[x2][i+1])
+
+    #위
+    for i in range(x2,x1,-1):
+        metrix[i][y2] = metrix[i-1][y2]
+        min_value = min(min_value,metrix[i-1][y2])
+    #오른쪽
+    for i in range(y2,y1+1,-1):
+        metrix[x1][i] = metrix[x1][i-1]
+        min_value = min((min_value,metrix[x1][i-1]))
+
+    metrix[x1][y1+1] = first
     return min_value
 
 
