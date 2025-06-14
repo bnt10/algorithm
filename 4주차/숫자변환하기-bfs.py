@@ -13,5 +13,9 @@ def solution(x,y,n):
             dp[v*2] = min(dp[v*2], dp[v]+1)
         if v * 3 <= y:
             dp[v*3] = min(dp[v*3], dp[v]+1)
-
+    for i in range(x, y+1):
+        if dp[i] == INF:
+            continue
+        if i + n <= y:
+            dp[i+n] = min(dp[i+n] , dp[i] + 1)
     return dp[y] if dp[y] != INF else -1
